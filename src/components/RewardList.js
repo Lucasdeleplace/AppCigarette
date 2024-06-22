@@ -1,5 +1,3 @@
-// RewardList.js
-
 import React from 'react';
 
 const RewardList = ({ points, setPoints }) => {
