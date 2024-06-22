@@ -1,6 +1,9 @@
 import React from 'react';
+import * as Realm from "realm-web";
 
-const RewardList = ({ points, setPoints }) => {
+const APP_ID = "data-cigarette-anvncfi"; // Remplacez par votre ID d'application Realm
+
+const RewardList = ({ points, setPoints}) => {
   const rewards = [
     { id: 1, text: 'Reward', cost: 5 },
     { id: 2, text: 'Reward Illimité', cost: 10 },
@@ -11,11 +14,36 @@ const RewardList = ({ points, setPoints }) => {
     { id: 7, text: 'Reward', cost: 300 },
   ];
 
-  const buyReward = (rewardId) => {
+  const buyReward = async (rewardId) => {
     const reward = rewards.find(r => r.id === rewardId);
     if (points >= reward.cost) {
       console.log("Buy");
       setPoints(points - reward.cost);
+
+      const newPoints = points - reward.cost;
+
+      const app = new Realm.App({ id: APP_ID });
+      const credentials = Realm.Credentials.anonymous();
+      try {
+        const user = await app.logIn(credentials);
+        const mongo = user.mongoClient("mongodb-atlas");
+        const collection = mongo.db("app-data").collection("data");
+    
+        const filter = { _id: "1" };
+    
+        const update = {
+          $set: {
+            points: newPoints,
+          },
+        };
+    
+        const options = { upsert: true }; // Crée le document s'il n'existe pas
+    
+        const result = await collection.updateOne(filter, update, options);
+        console.log(`Document mis à jour avec succès: ${result.modifiedCount}`);
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour des données:", error);
+      }
 
       // Envoi du message à Discord
       const message = `N'amour vient d'acheter la récompense : ${reward.text}`;
