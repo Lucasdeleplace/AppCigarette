@@ -5,13 +5,13 @@ const APP_ID = "data-cigarette-anvncfi"; // Remplacez par votre ID d'application
 
 const RewardList = ({ points, setPoints}) => {
   const rewards = [
-    { id: 1, text: 'Reward', cost: 5 },
-    { id: 2, text: 'Reward Illimité', cost: 10 },
-    { id: 3, text: 'Reward', cost: 15 },
-    { id: 4, text: 'Reward', cost: 20 },
-    { id: 5, text: 'Reward Tea', cost: 50 },
-    { id: 6, text: 'Reward au choix', cost: 150 },
-    { id: 7, text: 'Reward', cost: 300 },
+    { id: 1, text: 'Calins Illimité', cost: 5 },
+    { id: 2, text: 'Bisous Illimité', cost: 10 },
+    { id: 3, text: 'Texte', cost: 15 },
+    { id: 4, text: 'Massage', cost: 20 },
+    { id: 5, text: 'Bubble Tea', cost: 50 },
+    { id: 6, text: 'Resto au choix', cost: 150 },
+    { id: 7, text: 'Disney', cost: 300 },
   ];
 
   const buyReward = async (rewardId) => {
