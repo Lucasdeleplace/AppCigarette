@@ -9,9 +9,11 @@ const RewardList = ({ points, setPoints}) => {
     { id: 2, text: 'Bisous Illimité', cost: 10 },
     { id: 3, text: 'Texte', cost: 15 },
     { id: 4, text: 'Massage', cost: 20 },
-    { id: 5, text: 'Bubble Tea', cost: 50 },
-    { id: 6, text: 'Resto au choix', cost: 150 },
-    { id: 7, text: 'Disney', cost: 300 },
+    { id: 5, text: 'Une fleur', cost: 35 },
+    { id: 6, text: 'Bubble Tea', cost: 50 },
+    { id: 7, text: 'Bouquet de fleurs', cost: 85 },
+    { id: 8, text: 'Resto au choix', cost: 150 },
+    { id: 9, text: 'Disney', cost: 300 },
   ];
 
   const buyReward = async (rewardId) => {
