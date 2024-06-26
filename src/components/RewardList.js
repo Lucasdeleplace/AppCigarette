@@ -3,17 +3,24 @@ import * as Realm from "realm-web";
 
 const APP_ID = "data-cigarette-anvncfi"; // Remplacez par votre ID d'application Realm
 
+
 const RewardList = ({ points, setPoints}) => {
+  let id = 1;
   const rewards = [
-    { id: 1, text: 'Calins Illimité', cost: 5 },
-    { id: 2, text: 'Bisous Illimité', cost: 10 },
-    { id: 3, text: 'Texte', cost: 15 },
-    { id: 4, text: 'Massage', cost: 20 },
-    { id: 5, text: 'Une fleur', cost: 35 },
-    { id: 6, text: 'Bubble Tea', cost: 50 },
-    { id: 7, text: 'Bouquet de fleurs', cost: 85 },
-    { id: 8, text: 'Resto au choix', cost: 150 },
-    { id: 9, text: 'Disney', cost: 300 },
+    { id: id++, text: 'Calins Illimité', cost: 5 },
+    { id: id++, text: 'Bisous Illimité', cost: 10 },
+    { id: id++, text: 'Texte', cost: 15 },
+    { id: id++, text: 'Massage', cost: 20 },
+    { id: id++, text: 'pique-nique', cost: 30 },
+    { id: id++, text: 'Une fleur', cost: 35 },
+    { id: id++, text: 'Un manga au choix', cost: 45 },
+    { id: id++, text: 'Bubble Tea', cost: 50 },
+    { id: id++, text: 'Bouquet de fleurs', cost: 85 },
+    { id: id++, text: 'Resto au choix', cost: 150 },
+    { id: id++, text: 'AquaPark', cost: 200 },
+    { id: id++, text: 'Go to plus grand magasin de bonbon', cost: 250 },
+    { id: id++, text: 'Parc d\'attraction au choix', cost: 300 },
+    { id: id++, text: 'Disney', cost: 500 },
   ];
 
   const buyReward = async (rewardId) => {
