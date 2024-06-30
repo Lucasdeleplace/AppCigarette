@@ -77,7 +77,7 @@ const RewardList = ({ points, setPoints }) => {
       const message = `<@371386482717622273> N'amour vient d'acheter la récompense : ${reward.text}`;
         
       if (reward.text !== "test") {
-        fetch('https://discord.com/api/webhooks/1253843365305516104/yHjCt8nZCGKGeIf1aJUc-bYjykFwkAw8eIwvwqrQpmXXXgBEo0uLKkHshume_7zNApvD', {
+        fetch('https://discord.com/api/webhooks/1257062671019151481/zshG68Df69ewEfjF_vi7MyKnns82LL0lkuCboeYbHzkQzYIBjlbYzgFMgGjh1OM-7RGB', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
