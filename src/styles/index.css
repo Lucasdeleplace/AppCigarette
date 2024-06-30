@@ -56,11 +56,9 @@ button {
 
 .reward-list-scrollable {
   position: relative;
-  max-height: 400px;
+  max-height: 530px;
   overflow-y: auto;
 }
-
-
 
 button:hover {
   background-color: #0056b3;

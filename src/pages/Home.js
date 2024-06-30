@@ -5,6 +5,7 @@ import PointsCounter from '../components/PointsCounter';
 import CigaretteCounter from '../components/CigaretteCounter';
 import RewardList from '../components/RewardList';
 import TimeReset from '../components/TimeReset';
+import DailyChallenge from '../components/DailyChallenge';
 
 const APP_ID = "data-cigarette-anvncfi"; // Remplacez par votre ID d'application Realm
 
@@ -12,7 +13,13 @@ const Home = () => {
   const [days, setDays] = useState(0);
   const [points, setPoints] = useState(0);
   const [cigarettes, setCigarettes] = useState(0);
+  const [dailyChallenge, setDailyChallenge] = useState(""); // Ajout de l'état dailyChallenge
   const [isLoading, setIsLoading] = useState(true); // Ajout de l'état isLoading
+
+  //faire une liste de defis
+  const listChallenge = [
+    { id: 1, challenge: "Ne pas fumer pendant 24h"},
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +32,11 @@ const Home = () => {
         const data = await collection.find({});
         if (data.length > 0) {
           const latest = data[data.length - 1];
+          setDailyChallenge(latest.dailychallenges); // Met à jour l'état dailyChallenge
           setDays(latest.days);
           setPoints(latest.points);
           setCigarettes(latest.cigarettes);
+          
         }
         setIsLoading(false); // Données chargées, on met isLoading à false
       } catch (error) {
@@ -36,7 +45,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [points, days, cigarettes]);
 
   if (isLoading) {
     return <div>Chargement...</div>; // Affiche un message de chargement
@@ -54,6 +63,7 @@ const Home = () => {
     setDays(newDays);
     setPoints(newPoints);
     setCigarettes(0);
+    setDailyChallenge(listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge);
     
     saveData(newDays, newPoints, 0);
   };
@@ -73,6 +83,7 @@ const Home = () => {
           days: days,
           points: points,
           cigarettes: cigarettes,
+          dailychallenges: dailyChallenge,
         },
       };
   
@@ -89,6 +100,7 @@ const Home = () => {
     <div className="container">
       <div className="main-content">
         <div className="left-content">
+        <DailyChallenge challenge={dailyChallenge} points={points} setPoints={setPoints} />
           <DaysCounter days={days} />
           <PointsCounter points={points} />
           <CigaretteCounter cigarettes={cigarettes} onChange={handleCigaretteChange} />
