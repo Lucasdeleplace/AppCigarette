@@ -3,13 +3,13 @@ import * as Realm from "realm-web";
 
 
 // Add setPoints to the component's props
-const DailyChallenge = ({ challenge, points, setPoints, pountos }) => {
+const DailyChallenge = ({ challenge, points, setPoints }) => {
     const [completed, setCompleted] = useState(false);
     const [point, setPoint] = useState(points);
   
     const handleComplete = () => {
       setCompleted(true);
-      setPoint(point + pountos);
+      setPoint(point + 5);
     };
   
     useEffect(() => {
