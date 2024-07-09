@@ -63,7 +63,7 @@ const Home = () => {
     setDays(newDays);
     setPoints(newPoints);
     setCigarettes(0);
-    setDailyChallenge(listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge);
+    //setDailyChallenge(listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge);
     
     saveData(newDays, newPoints, 0);
   };
@@ -100,7 +100,6 @@ const Home = () => {
     <div className="container">
       <div className="main-content">
         <div className="left-content">
-        <DailyChallenge challenge={dailyChallenge} points={points} setPoints={setPoints} />
           <DaysCounter days={days} />
           <PointsCounter points={points} />
           <CigaretteCounter cigarettes={cigarettes} onChange={handleCigaretteChange} />
