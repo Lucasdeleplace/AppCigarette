@@ -15,6 +15,7 @@ const Home = () => {
   const [cigarettes, setCigarettes] = useState(0);
   const [dailyChallenge, setDailyChallenge] = useState(""); // Ajout de l'état dailyChallenge
   const [isLoading, setIsLoading] = useState(true); // Ajout de l'état isLoading
+  const [completed, setCompleted] = useState(false); // Ajout de l'état completed
 
   //faire une liste de defis
   const listChallenge = [
@@ -96,10 +97,18 @@ const Home = () => {
     }
   };
 
+  const handleChange = async () => {
+    const newPoints = points + 5;
+    setCompleted(true);
+    setPoints(newPoints);
+    await saveData(days, newPoints, cigarettes);
+  }
+
   return (
     <div className="container">
       <div className="main-content">
         <div className="left-content">
+        <DailyChallenge challenge={dailyChallenge} onClick={handleChange} completed={completed} />
           <DaysCounter days={days} />
           <PointsCounter points={points} />
           <CigaretteCounter cigarettes={cigarettes} onChange={handleCigaretteChange} />
