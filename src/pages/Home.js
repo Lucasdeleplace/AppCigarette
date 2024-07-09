@@ -20,6 +20,10 @@ const Home = () => {
   //faire une liste de defis
   const listChallenge = [
     { id: 1, challenge: "Ne pas fumer pendant 24h"},
+    { id: 2, challenge: "Allez faire un tour dehors pendant 10 minutes"},
+    { id: 3, challenge: "M'ecrire une truc d'amour (un petit truc pas un texte)"},
+    { id: 4, challenge: "Te reveiller à 10h - 10h30 au plus tard"},
+    { id: 5, challenge: "Faire un truc que tu ne fais pas d'habitude mais que tu devrais faire"},
   ];
 
   useEffect(() => {
@@ -37,6 +41,7 @@ const Home = () => {
           setDays(latest.days);
           setPoints(latest.points);
           setCigarettes(latest.cigarettes);
+          setCompleted(latest.completed);
           
         }
         setIsLoading(false); // Données chargées, on met isLoading à false
@@ -46,7 +51,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, [points, days, cigarettes]);
+  }, [points, days, cigarettes, dailyChallenge, completed]);
 
   if (isLoading) {
     return <div>Chargement...</div>; // Affiche un message de chargement
@@ -61,15 +66,22 @@ const Home = () => {
   const handleReset = async () => {
     const newDays = days + 1;
     const newPoints = cigarettes === 0 ? points + 8 : cigarettes === 1 ? points + 4 : cigarettes === 2 ? points + 2 : cigarettes === 3 ? points + 1 : points - (cigarettes - 3)
+    let newChallenge = ""
     setDays(newDays);
     setPoints(newPoints);
     setCigarettes(0);
-    //setDailyChallenge(listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge);
-    
-    saveData(newDays, newPoints, 0);
+    if(completed) {
+      newChallenge = listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge; // Sélectionne un défi aléatoire
+      setDailyChallenge(newChallenge); // Met à jour l'état dailyChallenge
+    } else {
+      newChallenge = dailyChallenge;
+    }
+    setCompleted(false);
+
+    saveData(newDays, newPoints, 0, newChallenge);
   };
 
-  const saveData = async (days, points, cigarettes) => {
+  const saveData = async (days, points, cigarettes, dailyChallenges, completed) => {
     const app = new Realm.App({ id: APP_ID });
     const credentials = Realm.Credentials.anonymous();
     try {
@@ -84,7 +96,8 @@ const Home = () => {
           days: days,
           points: points,
           cigarettes: cigarettes,
-          dailychallenges: dailyChallenge,
+          dailychallenges: dailyChallenges,
+          completed: completed,
         },
       };
   
@@ -101,7 +114,7 @@ const Home = () => {
     const newPoints = points + 5;
     setCompleted(true);
     setPoints(newPoints);
-    await saveData(days, newPoints, cigarettes);
+    await saveData(days, newPoints, cigarettes, dailyChallenge, true);
   }
 
   return (
