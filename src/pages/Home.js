@@ -66,17 +66,18 @@ const Home = () => {
   const handleReset = async () => {
     const newDays = days + 1;
     const newPoints = cigarettes === 0 ? points + 8 : cigarettes === 1 ? points + 4 : cigarettes === 2 ? points + 2 : cigarettes === 3 ? points + 1 : points - (cigarettes - 3)
-    let newChallenge = ""
+    let newChallenge = " ";
     setDays(newDays);
     setPoints(newPoints);
     setCigarettes(0);
     if(completed) {
       newChallenge = listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge; 
-      setDailyChallenge(newChallenge); 
     } else {
       newChallenge = dailyChallenge;
     }
     setCompleted(false);
+
+    setDailyChallenge(newChallenge); 
 
     saveData(newDays, newPoints, 0, newChallenge, false);
   };
