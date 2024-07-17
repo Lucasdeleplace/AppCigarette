@@ -7,17 +7,17 @@ import RewardList from '../components/RewardList';
 import TimeReset from '../components/TimeReset';
 import DailyChallenge from '../components/DailyChallenge';
 
-const APP_ID = "data-cigarette-anvncfi"; // Remplacez par votre ID d'application Realm
+const APP_ID = "data-cigarette-anvncfi"; 
 
 const Home = () => {
   const [days, setDays] = useState(0);
   const [points, setPoints] = useState(0);
   const [cigarettes, setCigarettes] = useState(0);
-  const [dailyChallenge, setDailyChallenge] = useState(""); // Ajout de l'état dailyChallenge
-  const [isLoading, setIsLoading] = useState(true); // Ajout de l'état isLoading
-  const [completed, setCompleted] = useState(false); // Ajout de l'état completed
+  const [dailyChallenge, setDailyChallenge] = useState(""); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const [completed, setCompleted] = useState(false); 
 
-  //faire une liste de defis
+  
   const listChallenge = [
     { id: 1, challenge: "Ne pas fumer pendant 24h"},
     { id: 2, challenge: "Allez faire un tour dehors pendant 10 minutes"},
@@ -37,24 +37,24 @@ const Home = () => {
         const data = await collection.find({});
         if (data.length > 0) {
           const latest = data[data.length - 1];
-          setDailyChallenge(latest.dailychallenges); // Met à jour l'état dailyChallenge
+          setDailyChallenge(latest.dailychallenges); 
           setDays(latest.days);
           setPoints(latest.points);
           setCigarettes(latest.cigarettes);
           setCompleted(latest.completed);
           
         }
-        setIsLoading(false); // Données chargées, on met isLoading à false
+        setIsLoading(false); 
       } catch (error) {
         console.error("Failed to fetch data:", error);
-        setIsLoading(false); // En cas d'erreur, on met aussi isLoading à false
+        setIsLoading(false); 
       }
     };
     fetchData();
   }, [points, days, cigarettes, dailyChallenge, completed]);
 
   if (isLoading) {
-    return <div>Chargement...</div>; // Affiche un message de chargement
+    return <div>Chargement...</div>; 
   }
 
   const handleCigaretteChange = async (change) => {
@@ -71,14 +71,14 @@ const Home = () => {
     setPoints(newPoints);
     setCigarettes(0);
     if(completed) {
-      newChallenge = listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge; // Sélectionne un défi aléatoire
-      setDailyChallenge(newChallenge); // Met à jour l'état dailyChallenge
+      newChallenge = listChallenge[Math.floor(Math.random() * listChallenge.length)].challenge; 
+      setDailyChallenge(newChallenge); 
     } else {
       newChallenge = dailyChallenge;
     }
     setCompleted(false);
 
-    saveData(newDays, newPoints, 0, newChallenge);
+    saveData(newDays, newPoints, 0, newChallenge, false);
   };
 
   const saveData = async (days, points, cigarettes, dailyChallenges, completed) => {
@@ -101,7 +101,7 @@ const Home = () => {
         },
       };
   
-      const options = { upsert: true }; // Crée le document s'il n'existe pas
+      const options = { upsert: true }; 
   
       const result = await collection.updateOne(filter, update, options);
       console.log(`Document mis à jour avec succès: ${result.modifiedCount}`);
