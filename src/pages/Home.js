@@ -60,7 +60,7 @@ const Home = () => {
   const handleCigaretteChange = async (change) => {
     const newCigarettes = cigarettes + change;
     setCigarettes(newCigarettes);
-    await saveData(days, points, newCigarettes);
+    await saveData(days, points, newCigarettes, dailyChallenge, completed);
   };
 
   const handleReset = async () => {
