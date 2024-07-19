@@ -117,12 +117,12 @@ const Home = () => {
     setPoints(newPoints);
     await saveData(days, newPoints, cigarettes, dailyChallenge, true);
   }
-
+//<DailyChallenge challenge={dailyChallenge} onClick={handleChange} completed={completed} />
   return (
     <div className="container">
       <div className="main-content">
         <div className="left-content">
-        <DailyChallenge challenge={dailyChallenge} onClick={handleChange} completed={completed} />
+        
           <DaysCounter days={days} />
           <PointsCounter points={points} />
           <CigaretteCounter cigarettes={cigarettes} onChange={handleCigaretteChange} />
