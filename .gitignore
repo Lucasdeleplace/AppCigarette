@@ -5,7 +5,6 @@
 /TODO
 /.pnp
 .pnp.js
-#ignone package-lock.json
 package-lock.json
 
 # testing
