@@ -9,12 +9,13 @@ const RewardList = ({ points, setPoints }) => {
   const [heartPositions, setHeartPositions] = useState([]);
   const rewards = [
     { id: id++, text: 'test', cost: 0 },
-    { id: id++, text: 'Calins Illimité', cost: 5 },
-    { id: id++, text: 'Bisous Illimité', cost: 10 },
-    { id: id++, text: 'Texte', cost: 15 },
-    { id: id++, text: 'Massage', cost: 20 },
-    { id: id++, text: 'pique-nique', cost: 30 },
-    { id: id++, text: 'Une fleur', cost: 35 },
+    { id: id++, text: 'Reward', cost: 5 },
+    { id: id++, text: 'Reward', cost: 10 },
+    { id: id++, text: 'Reward', cost: 15 },
+    { id: id++, text: 'Reward', cost: 20 },
+    { id: id++, text: 'Reward', cost: 30 },
+    { id: id++, text: 'Reward', cost: 35 },
+
     { id: id++, text: 'Un manga au choix', cost: 45 },
     { id: id++, text: 'Bubble Tea', cost: 50 },
     { id: id++, text: 'Bouquet de fleurs', cost: 85 },
@@ -74,9 +75,8 @@ const RewardList = ({ points, setPoints }) => {
         console.error("Error updating data:", error);
       }
 
-      const message = `<@371386482717622273> N'amour vient d'acheter la récompense : ${reward.text}`;
+      const message = `<@371386482717622273> Une personne vient d'acheter la récompense : ${reward.text}`;
         
-      if (reward.text !== "test") {
         fetch('https://discord.com/api/webhooks/1257062671019151481/zshG68Df69ewEfjF_vi7MyKnns82LL0lkuCboeYbHzkQzYIBjlbYzgFMgGjh1OM-7RGB', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -90,7 +90,6 @@ const RewardList = ({ points, setPoints }) => {
         }).catch(error => {
           console.error('Error sending message to Discord', error);
         });
-      }
     } else {
       alert('Vous n\'avez pas assez de points pour acheter cette récompense');
     }
